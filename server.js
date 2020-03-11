@@ -18,6 +18,12 @@ db.on('open', () => {
     console.log('Connection made!');
 });
 
+
+app.get('/', (req, res) => {
+    res.send('your app is working');
+})
+
+
 app.listen(process.env.PORT, (req, res) => {
   console.log(`listening on port ${process.env.PORT}`);
 })

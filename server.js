@@ -8,29 +8,63 @@ const dbupdateobject = {
     useUnifiedTopology: true,
     useFindAndModify: false
 };
+const methodOverride = require('method-override');
 const product = require('./models/products.js');
+const upcomingProducts = require('./models/upcomingProducts.js');
+
 // const Product = require('./models/products.js')
 
+app.use(methodOverride('_method'));
+app.use(express.static('public'));
+app.use(express.urlencoded({extended: false}));
 
-// app.get('/Project2/:indexOfProductsArray', (req, res) => {
-//   Product.find(req.body, (error, products) => {
-//     res.render('show.ejs',
-//                 {
-//                   product: products
-//                 }
-//             )
-//       })
-// });
+app.delete('/Project2/new/:indexOfUpcomingProductsArray', (req, res) => {
+    upcomingProducts.splice(req.params.indexOfUpcomingProductsArray);
+    res.redirect('/Project2/new');
+})
 
+//will display an edit form for a single item
+app.get('/Project2/:indexOfUpcomingProductsArray/edit', (req, res) => {
+    res.render('edit.ejs',
+          {
+            upcomingProduct:upcomingProducts[req.params.indexOfUpcomingProductsArray],
+            index: req.params.indexOfUpcomingProductsArray
+          }
+  );
+});
 
+app.put('/Project2/:indexOfUpcomingProductsArray', (req, res) => {
+    upcomingProducts[req.params.indexOfUpcomingProductsArray] = req.body;
+    res.redirect('/Project2/new');
+})
+
+//===========Index Page==================
 app.get('/Project2/', (req, res) => {
-  res.render('index.ejs',
+    res.render('index.ejs',
               {
                 allProducts:product
               }
         );
 });
 
+//===========Page to show other model products==================
+app.get('/Project2/new', (req, res) => {
+    res.render('new.ejs',
+                {
+                  allUpcomingProducts:upcomingProducts
+                }
+        );
+});
+
+
+//===========Posts the edit changes==================
+app.post('/Project2/new/', (req, res) => {
+    upcomingProducts.push(req.body);
+    res.redirect('/Project2/new');
+});
+
+
+//===========Show Page==================
 app.get('/Project2/:indexOfProductsArray', (req, res) => {
     res.render('show.ejs',
                 {

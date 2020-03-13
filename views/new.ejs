@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>For Registered Users Only</h1>
+    <p>I have here some products that I am going to be putting up on eBay soon.  So because your registered, you can play around with these products or create your own listing.</p><br/>
+
+    <%
+      for(i=0; i<allUpcomingProducts.length; i++) { %>
+        <img src="<%=allUpcomingProducts[i].img%>" alt="Image">
+        <p><%=allUpcomingProducts[i].name%><p>
+          <a href="/Project2/<%=i%>/edit">Edit</a>
+          <form action="/Project2/new/<%=i%>?_method=DELETE" method="post">
+            <input type="submit" value="Delete"/>
+          </form>
+
+    <% } %>
+    <br>
+
+    <h2>Create your own here!</h2>
+    <form action="/Project2/new/" method="POST">
+      Image address: <input type="text" name="img"/></br>
+      Name: <input type="text" name="name"/></br>
+      Details: <input type="text" name="details"/></br>
+      <input type="submit" name="" value="Create"/>
+    </form>
+  </body>
+</html>

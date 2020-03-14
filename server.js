@@ -9,70 +9,26 @@ const dbupdateobject = {
     useFindAndModify: false
 };
 const methodOverride = require('method-override');
-const product = require('./models/products.js');
-const upcomingProducts = require('./models/upcomingProducts.js');
 
-// const Product = require('./models/products.js')
+
 
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
-app.delete('/Project2/new/:indexOfUpcomingProductsArray', (req, res) => {
-    upcomingProducts.splice(req.params.indexOfUpcomingProductsArray);
-    res.redirect('/Project2/new');
+const productsController = require('./controllers/productsController.js');
+app.use(productsController);
+// you could put '/Project2',prod...) and take off /Project2 in controller
+
+const usersController = require('./controllers/usersController.js');
+app.use(usersController);
+
+const sessionController = require('./controllers/sessionController.js');
+app.use(sessionController);
+
+app.get('/', (req, res) => {
+    res.render('homepage.ejs');
 })
-
-//will display an edit form for a single item
-app.get('/Project2/:indexOfUpcomingProductsArray/edit', (req, res) => {
-    res.render('edit.ejs',
-          {
-            upcomingProduct:upcomingProducts[req.params.indexOfUpcomingProductsArray],
-            index: req.params.indexOfUpcomingProductsArray
-          }
-  );
-});
-
-app.put('/Project2/:indexOfUpcomingProductsArray', (req, res) => {
-    upcomingProducts[req.params.indexOfUpcomingProductsArray] = req.body;
-    res.redirect('/Project2/new');
-})
-
-//===========Index Page==================
-app.get('/Project2/', (req, res) => {
-    res.render('index.ejs',
-              {
-                allProducts:product
-              }
-        );
-});
-
-//===========Page to show other model products==================
-app.get('/Project2/new', (req, res) => {
-    res.render('new.ejs',
-                {
-                  allUpcomingProducts:upcomingProducts
-                }
-        );
-});
-
-
-//===========Posts the edit changes==================
-app.post('/Project2/new/', (req, res) => {
-    upcomingProducts.push(req.body);
-    res.redirect('/Project2/new');
-});
-
-
-//===========Show Page==================
-app.get('/Project2/:indexOfProductsArray', (req, res) => {
-    res.render('show.ejs',
-                {
-                  products:product[req.params.indexOfProductsArray]
-                }
-          );
-});
-
 
 app.listen(process.env.PORT, (req, res) => {
   console.log(`listening on port ${process.env.PORT}`);

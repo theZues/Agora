@@ -9,12 +9,18 @@ const dbupdateobject = {
     useFindAndModify: false
 };
 const methodOverride = require('method-override');
+const session = require('express-session');
 
 
 
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
+app.use(session({
+    secret:"feedmeseymour",
+    resave:false,
+    saveUninitialized:false
+}));
 
 const productsController = require('./controllers/productsController.js');
 app.use(productsController);

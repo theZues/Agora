@@ -14,6 +14,9 @@ router.delete('/Project2/new/:id', (req, res) => {
     });
 });
 
+
+
+
 //=========will display an edit form for a single item============
 router.get('/Project2/:id/edit', (req, res) => {
   UpcomingProductSchema.findById(req.params.id, (error, foundUpcomingProduct) => {
@@ -33,6 +36,11 @@ router.put('/Project2/:id', (req, res) => {
       res.redirect('/Project2/new');
     });
     // upcomingProducts[req.params.indexOfUpcomingProductsArray] = req.body;
+});
+
+//================about page===================
+router.get('/Project2/about', (req, res) => {
+    res.render('project2/about.ejs');
 });
 
 //===========Index Page==================

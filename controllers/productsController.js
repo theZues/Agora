@@ -71,7 +71,6 @@ router.post('/Project2/new/', (req, res) => {
 //===========Show Page==================completed with schema
 router.get('/Project2/:id', (req, res) => {
   ProductSchema.findById(req.params.id, (err, foundProduct) => {
-    console.log(err);
     res.render('project2/show.ejs',
                 {
                   product:foundProduct

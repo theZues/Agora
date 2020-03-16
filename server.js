@@ -32,8 +32,8 @@ app.use(usersController);
 const sessionController = require('./controllers/sessionController.js');
 app.use(sessionController);
 
-app.get('/', (req, res) => {
-    res.render('homepage.ejs');
+app.get('/Project2', (req, res) => {
+    res.render('/views/Project2/index.ejs');
 })
 
 app.listen(process.env.PORT, (req, res) => {

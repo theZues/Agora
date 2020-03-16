@@ -10,14 +10,14 @@
     <p>I have here some products that I am going to be putting up on eBay soon.  So because your registered, you can play around with these products or create your own listing.</p><br/>
 
     <%
-      for(i=0; i<allUpcomingProducts.length; i++) { %>
-        <img src="<%=allUpcomingProducts[i].img%>" alt="Image">
-        <p><%=allUpcomingProducts[i].name%><p>
-          <a href="/Project2/<%=i%>/edit">Edit</a>
-          <form action="/Project2/new/<%=i%>?_method=DELETE" method="post">
+      for(i=0; i < upcomingProducts.length; i++) { %>
+        <img src="<%=upcomingProducts[i].img%>" alt="Image"/>
+        <p><%=upcomingProducts[i].name%></p>
+          <a href="/Project2/<%=upcomingProducts[i].id%>/edit">Edit</a>
+          <form action="/Project2/new/<%=upcomingProducts[i].id%>?_method=DELETE" method="post">
             <input type="submit" value="Delete"/>
           </form>
-
+        </br>
     <% } %>
     <br>
 

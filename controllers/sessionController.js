@@ -11,14 +11,14 @@ router.get('/session/new', (req, res) => {
 router.post('/session', (req, res) => {
     User.findOne({username: req.body.username}, (error, foundUser) => {
         if(foundUser === null){
-          res.redirect('/session/new.ejs');
+          res.redirect('/session/new');
         } else {
           const doesPasswordMatch = bcrypt.compareSync(req.body.password,foundUser.password);
           if(doesPasswordMatch){
             req.session.user = foundUser;
             res.redirect('/Project2/new');
           } else{
-          res.redirect('/session/new.ejs');
+          res.redirect('/session/new');
         }
       }
   });

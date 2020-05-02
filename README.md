@@ -4,7 +4,7 @@
 
   ## Approach Taken
 
-  I started off from scratch.  I began with no schema's and built the RESTful routes first.  I then built in the schema's afterwards, then tackled CSS with skeleton at the end.  Here's the link https://theagorasite.herokuapp.com/
+  I started off from scratch.  I began with no schema's and built the RESTful routes first.  I then built in the schema's afterwards, then tackled CSS with skeleton at the end.  I used  Node.js, Mongoose, Express and EJS and I also adhered to the MVC model architecture.  Here's the link https://theagorasite.herokuapp.com/
   
   ## Built With
 

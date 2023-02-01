@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ProductSchema = require('../models/products.js');
-// const product = require('../models/products.js');
 const UpcomingProductSchema = require('../models/upcomingProducts.js')
-// const upcomingProducts = require('../models/upcomingProducts.js');
-
-
 
 
 router.delete('/Project2/new/:id', (req, res) => {
@@ -15,15 +11,12 @@ router.delete('/Project2/new/:id', (req, res) => {
 });
 
 
-
-
 //=========will display an edit form for a single item============
 router.get('/Project2/:id/edit', (req, res) => {
   UpcomingProductSchema.findById(req.params.id, (error, foundUpcomingProduct) => {
     res.render('project2/edit.ejs',
           {
             upcomingProduct:foundUpcomingProduct
-            // index: req.params.id
           }
       );
   });
